@@ -15,14 +15,14 @@ const AuthCallbackPage = () => {
       if (!isLoaded || !user || syncAttempted.current) return;
 
       try {
+        syncAttempted.current = true;
+
         await axiosInstance.post("/auth/callback", {
           id: user.id,
           firstName: user.firstName,
           lastName: user.lastName,
           imageUrl: user.imageUrl,
         });
-
-        syncAttempted.current = true;
       } catch (error) {
         console.log("Error in auth callback", error);
       } finally {
@@ -45,5 +45,4 @@ const AuthCallbackPage = () => {
     </div>
   );
 };
-
 export default AuthCallbackPage;
